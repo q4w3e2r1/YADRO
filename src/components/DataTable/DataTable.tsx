@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './DataTable.module.css';
 import { TableRow } from '../../types/data';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { setSelectedRow } from '../../store/dataSlice';
 
-interface DataTableProps {
-  data: TableRow[];
-  headers: string[];
-  onRowSelect: (row: TableRow) => void;
-}
+const DataTable: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { headers, tableData, selectedRow } = useAppSelector((state) => state.data);
 
-const DataTable: React.FC<DataTableProps> = ({ data, headers, onRowSelect }) => {
+  const handleRowSelect = (row: TableRow) => {
+    dispatch(setSelectedRow(row));
+  };
+
   return (
     <table className={styles.table}>
       <thead>
@@ -20,8 +23,12 @@ const DataTable: React.FC<DataTableProps> = ({ data, headers, onRowSelect }) => 
         </tr>
       </thead>
       <tbody>
-        {data.map((row, index) => (
-          <tr key={index} onClick={() => onRowSelect(row)}>
+        {tableData.map((row, index) => (
+          <tr 
+            key={index} 
+            onClick={() => handleRowSelect(row)}
+            className={selectedRow?.title === row.title ? styles.selectedRow : ''}
+          >
             <td>{row.title}</td>
             {row.values.map((value, valueIndex) => (
               <td key={valueIndex}>{value}</td>
