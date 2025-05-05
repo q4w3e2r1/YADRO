@@ -1,0 +1,5 @@
+.data-controls{
+    display: flex;
+    gap: 50px;
+    margin-bottom: 50px;
+}
