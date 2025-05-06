@@ -53,6 +53,7 @@ const dataSlice = createSlice({
     clearData: (state) => {
       state.tableData = [];
       state.selectedRow = null;
+      state.headers = [];
     }
   }
 });

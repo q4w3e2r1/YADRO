@@ -17,7 +17,7 @@ interface BarChartProps {
 
 const CustomBarChart: React.FC<BarChartProps> = ({ data }) => {
   return (
-    <div className={styles.chartContainer}>
+    <div className={styles.chartContainer} data-testid="chart-container">
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
